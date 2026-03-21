@@ -3,6 +3,12 @@ import zipfile
 import requests
 import frontmatter
 
+try:
+    from .chunking import intelligent_chunk_documents
+except ImportError:
+    # Allow running this file directly: `python main.py`
+    from chunking import intelligent_chunk_documents
+
 def read_repo_data(repo_owner, repo_name):
     """
     Download and parse all markdown files from a GitHub repository.
@@ -47,5 +53,9 @@ def read_repo_data(repo_owner, repo_name):
 
 dtc_faq = read_repo_data('DataTalksClub', 'faq')
 evidently_docs = read_repo_data('evidentlyai', 'docs')
-print(f"FAQ documents: {dtc_faq}")
-print(f"Evidently documents: {len(evidently_docs)}")
+# print(f"FAQ documents: {dtc_faq}")
+# print(f"Evidently documents: {len(evidently_docs)}")
+
+
+evidently_chunks = intelligent_chunk_documents(evidently_docs, content_key="content")
+print(len(evidently_chunks))
