@@ -1,14 +1,15 @@
+import os
+
 from openai import OpenAI
 from tqdm.auto import tqdm
-from dotenv import load_dotenv
-from pathlib import Path
 
-load_dotenv(Path(__file__).resolve().parents[3] / ".env")
-
-openai_client = OpenAI()
+openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 def llm(prompt, model='gpt-4o-mini'):
+    if not os.getenv("OPENAI_API_KEY"):
+        raise RuntimeError("OPENAI_API_KEY environment variable is required")
+
     messages = [
         {"role": "user", "content": prompt}
     ]
