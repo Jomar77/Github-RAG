@@ -1,0 +1,167 @@
+{
+  "agent_name": "faq_agent_V2",
+  "system_prompt": "['\\nYou are a helpful assistant for a course.\\n\\nUse the search tool to find relevant information from the course materials before answering questions.\\n\\nIf you can find specific information through search, use it to provide accurate answers.\\n\\nAlways include references by citing the filename of the source material you used.  \\nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\\n\\nIf the search doesn\\'t return relevant results, let the user know and provide general guidance.\\n']",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "text_search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "can I join late and get a certificate?",
+          "timestamp": "2026-03-26T08:20:00.796095+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-03-26T08:20:00.796095+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "697cff8e-1cad-42ad-95dc-8f54a2165e20",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "args": "{\"query\":\"join late certificate\"}",
+          "tool_call_id": "call_hRBoAi8tRgQtNR0hJlwoD6Ka",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 218,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 16,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T08:20:03.016322+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "tool_calls",
+        "timestamp": "2026-03-26T08:20:02+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNaEcAeFpECUqIDI3TBwA9HSXvFTu",
+      "finish_reason": "tool_call",
+      "run_id": "697cff8e-1cad-42ad-95dc-8f54a2165e20",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "content": [
+            {
+              "id": "3774a79c13",
+              "question": "Certificate: Do I need to do the homeworks to get the certificate?",
+              "sort_order": 14,
+              "content": "No, as long as you complete the peer-reviewed capstone projects on time, you can receive the certificate. You do not need to do the homeworks if you join late, for example.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/general/014_3774a79c13_certificate-do-i-need-to-do-the-homeworks-to-get-t.md"
+            },
+            {
+              "id": "6314bc3029",
+              "images": [
+                {
+                  "description": "image #1",
+                  "id": "image_1",
+                  "path": "images/data-engineering-zoomcamp/image_1813f02b.png"
+                }
+              ],
+              "question": "How do I get my certificate?",
+              "sort_order": 46,
+              "content": "There'll be an announcement in Telegram and the course channel for:\n\n- Checking that your full name is displayed correctly on the Certificate (see Editing course profile on the Course Management webpage).\n- Notifying when the grading is completed.\n\nYou will find it in your course profile (you need to be\nlogged it). \n\nFor 2025 the link to the course profile is this:\n\n`https://courses.datatalks.club/de-zoomcamp-2025/enrollment`\n\nFor other editions, change \"2025\" to your edition.\n\nAfter the second announcement, follow instructions in [certificates.md](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/certificates.md) on how to generate the Certificate document yourself.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/general/046_6314bc3029_how-do-i-get-my-certificate.md"
+            },
+            {
+              "id": "900f60fd25",
+              "question": "Certificate - Can I follow the course in a self-paced mode and get a certificate?",
+              "sort_order": 15,
+              "content": "No, you can only get a certificate if you finish the course with a \u201clive\u201d cohort. We don't award certificates for the self-paced mode. The reason is you need to peer-review capstone(s) after submitting a project. You can only peer-review projects at the time the course is running.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/general/015_900f60fd25_certificate-can-i-follow-the-course-in-a-self-pace.md"
+            },
+            {
+              "id": "4dbd2eea47",
+              "question": "Homework: Are late submissions of homework allowed?",
+              "sort_order": 17,
+              "content": "No, late submissions are not allowed. However, if the form is still open after the due date, you can still submit the homework. Confirm your submission by checking the date-timestamp on the Course page. Ensure you are logged in.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/general/017_4dbd2eea47_homework-are-late-submissions-of-homework-allowed.md"
+            },
+            {
+              "id": "542abbcb6a",
+              "question": "wget - ERROR: cannot verify <website> certificate  (MacOS)",
+              "sort_order": 6,
+              "content": "Firstly, make sure that you add `!` before `wget` if you\u2019re running your command in a Jupyter Notebook or CLI. Then, you can check one of these two things (from CLI):\n\n- **Using the Python library wget installed with pip:**\n\n  ```bash\n  python -m wget <url>\n  ```\n\n- **Use the usual command and add `--no-check-certificate` at the end:**\n\n  ```bash\n  !wget <website_url> --no-check-certificate\n  ```",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/006_542abbcb6a_wget-error-cannot-verify-website-certificate-macos.md"
+            }
+          ],
+          "tool_call_id": "call_hRBoAi8tRgQtNR0hJlwoD6Ka",
+          "metadata": null,
+          "timestamp": "2026-03-26T08:20:03.045197+00:00",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-03-26T08:20:03.045197+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "697cff8e-1cad-42ad-95dc-8f54a2165e20",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "content": "You can indeed join the course late and still receive a certificate, but you must complete the peer-reviewed capstone projects on time. The homework assignments are not required if you join late. \n\nHere's a relevant excerpt from the course materials:\n\n\"No, as long as you complete the peer-reviewed capstone projects on time, you can receive the certificate. You do not need to do the homeworks if you join late, for example.\" \n\nFor further details on how to obtain your certificate, you can refer to this guide: [How do I get my certificate?](https://github.com/DataTalksClub/faq/blob/main/faq-main/_questions/data-engineering-zoomcamp/general/046_6314bc3029_how-do-i-get-my-certificate.md). \n\nIf you need any more information, feel free to ask!",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 1044,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 169,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T08:20:06.395428+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "stop",
+        "timestamp": "2026-03-26T08:20:03+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNaEd6gI7h7mBdqEhpCXnEHeomI7X",
+      "finish_reason": "stop",
+      "run_id": "697cff8e-1cad-42ad-95dc-8f54a2165e20",
+      "metadata": null
+    }
+  ],
+  "source": "user"
+}

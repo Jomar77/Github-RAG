@@ -87,7 +87,8 @@ async def run_batch_eval():
     eval_results = await evaluate_log_set(eval_agent, eval_set)
     df = eval_results_to_dataframe(eval_results)
     stats = eval_dataframe_stats(df)
-    
+    print(f"Evaluated records: {len(df)}")
+    print(df.head())
     print("Evaluation Stats:")
     print(stats)
     

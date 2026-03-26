@@ -16,6 +16,15 @@ COURSE_DIR = Path(__file__).resolve().parents[1]
 LOG_DIR = COURSE_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 DEFAULT_EVAL_MODEL = "gpt-5-nano"
+CHECK_COLUMNS = (
+    "instructions_follow",
+    "instructions_avoid",
+    "answer_relevant",
+    "answer_clear",
+    "answer_citations",
+    "completeness",
+    "tool_call_search",
+)
 
 EVALUATION_PROMPT = """
 Use this checklist to evaluate the quality of an AI agent's answer (<ANSWER>) to a user question (<QUESTION>).
@@ -370,6 +379,9 @@ def eval_results_to_rows(
             "answer": answer,
         }
 
+        for check_name in CHECK_COLUMNS:
+            row[check_name] = None
+
         checks = {c.check_name: c.check_pass for c in eval_result.checklist}
         row.update(checks)
         rows.append(row)
@@ -387,7 +399,32 @@ def eval_results_to_dataframe(
 
 
 def eval_dataframe_stats(df_evals):
-    return df_evals.mean(numeric_only=True)
+    import pandas as pd
+
+    if df_evals.empty:
+        return pd.Series(dtype="float64")
+
+    available_check_columns = [c for c in CHECK_COLUMNS if c in df_evals.columns]
+    if not available_check_columns:
+        return pd.Series(dtype="float64")
+
+    stats_frame = df_evals[available_check_columns].copy()
+    mapping = {
+        True: 1.0,
+        False: 0.0,
+        "true": 1.0,
+        "false": 0.0,
+        "True": 1.0,
+        "False": 0.0,
+    }
+
+    for column in available_check_columns:
+        series = stats_frame[column]
+        mapped = series.map(mapping)
+        combined = mapped.where(mapped.notna(), series)
+        stats_frame[column] = pd.to_numeric(combined, errors="coerce")
+
+    return stats_frame.mean()
 
 
 
@@ -395,6 +432,7 @@ def eval_dataframe_stats(df_evals):
 
 __all__ = [
     "DEFAULT_EVAL_MODEL",
+    "CHECK_COLUMNS",
     "EVALUATION_PROMPT",
     "EvaluationCheck",
     "EvaluationChecklist",
