@@ -1,0 +1,167 @@
+{
+  "agent_name": "faq_agent_V2",
+  "system_prompt": "['\\nYou are a helpful assistant for a course.\\n\\nUse the search tool to find relevant information from the course materials before answering questions.\\n\\nIf you can find specific information through search, use it to provide accurate answers.\\n\\nAlways include references by citing the filename of the source material you used.  \\nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\\n\\nIf the search doesn\\'t return relevant results, let the user know and provide general guidance.\\n']",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "text_search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "What should I set `JAVA_HOME` to on an Apple Silicon Mac?",
+          "timestamp": "2026-03-26T07:25:13.600417+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-03-26T07:25:13.600417+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "49f1c01b-996d-4180-8459-7106f5ac6467",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "args": "{\"query\":\"JAVA_HOME Apple Silicon Mac\"}",
+          "tool_call_id": "call_gAVsQb1hhYuFnSIFwmQg74fN",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 224,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 18,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:25:14.388941+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "tool_calls",
+        "timestamp": "2026-03-26T07:25:14+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNZNaI30qDg3hUDO7m5uuqb8xccYW",
+      "finish_reason": "tool_call",
+      "run_id": "49f1c01b-996d-4180-8459-7106f5ac6467",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "content": [
+            {
+              "id": "a5a8a6ac39",
+              "question": "Setting JAVA_HOME with Homebrew on Apple Silicon",
+              "sort_order": 59,
+              "content": "The MacOS setup instruction ([here](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/05-batch/setup/macos.md#installing-java)) for setting the `JAVA_HOME` environment variable is for Intel-based Macs, which have a default install location at `/usr/local/`. If you have an Apple Silicon Mac, you need to set `JAVA_HOME` to `/opt/homebrew/`. Update your `.bashrc` or `.zshrc` file with the following:\n\n```bash\nexport JAVA_HOME=\"/opt/homebrew/opt/openjdk/bin\"\nexport PATH=\"$JAVA_HOME:$PATH\"\n```\n\nConfirm that your path was correctly set by running the command:\n\n```bash\nwhich java\n```\n\nYou should expect to see the output:\n\n```\n/opt/homebrew/opt/openjdk/bin/java\n```\n\nCheck the Java version with the following command:\n\n```bash\njava -version\n```\n\nReference: [https://docs.brew.sh/Installation](https://docs.brew.sh/Installation)",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-6/059_a5a8a6ac39_setting-java_home-with-homebrew-on-apple-silicon.md"
+            },
+            {
+              "id": "b2eabcd7dc",
+              "question": "Docker: Setting up Docker on Mac",
+              "sort_order": 20,
+              "content": "For setting up Docker on macOS, you have two main options:\n\n1. **Download from Docker Website:**\n   - Visit the official Docker website and download the Docker Desktop for Mac as a `.dmg` file. This method is generally reliable and avoids issues related to licensing changes.\n\n2. **Using Homebrew:**\n   - Be aware that there can be conflicts when installing with Homebrew, especially between Docker Desktop and command-line tools. To avoid issues:\n     \n     - Install Docker Desktop first.\n     - Then install the command line tools.\n\n   - Commands:\n     \n     ```bash\n     brew install --cask docker\n     ```\n     \n     ```bash\n     brew install docker docker-compose\n     ```\n\n   - For more detailed issues related to `brew install`, refer to this [Issue](https://github.com/Homebrew/brew/issues/16309). \n\nFor more details, you can check the article on [Setting up Docker in macOS](https://medium.com/@vivekslair/setting-up-docker-in-macos-ee36d37b3be2).",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/020_b2eabcd7dc_docker-setting-up-docker-on-mac.md"
+            },
+            {
+              "id": "47f7c8310a",
+              "images": [
+                {
+                  "description": "image #1",
+                  "id": "image_1",
+                  "path": "images/data-engineering-zoomcamp/image_51551549.png"
+                }
+              ],
+              "question": "GCP BQ ML - Export ML model to make predictions does not work for MacBook with Apple M1 chip (arm architecture).",
+              "sort_order": 32,
+              "content": "**Solution:**\n\nProceed with setting up `serving_dir` on your computer as described in the `extract_model.md` file. Then, instead of using:\n\n```bash\ndocker pull tensorflow/serving\n```\n\nuse:\n\n```bash\ndocker pull emacski/tensorflow-serving\n```\n\nThen run:\n\n```bash\ndocker run -p 8500:8500 -p 8501:8501 --mount type=bind,source=`pwd`/serving_dir/tip_model,target=/models/tip_model -e MODEL_NAME=tip_model -t emacski/tensorflow-serving\n```\n\nAfter that, run the `curl` command as instructed, and you should get a prediction.\n\n**Or new since Oct 2024:**\n\nBeta release of Docker VMM - the more performant alternative to Apple Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later). [https://docs.docker.com/desktop/features/vmm/](https://docs.docker.com/desktop/features/vmm/)\n\n<{IMAGE:image_1}>",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-3/032_47f7c8310a_gcp-bq-ml-export-ml-model-to-make-predictions-does.md"
+            },
+            {
+              "id": "0e8bce921a",
+              "question": "Python Kafka: ./spark-submit.sh streaming.py Error: py4j.protocol.Py4JJavaError: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.",
+              "sort_order": 19,
+              "content": "Make sure your Java version is 11 or 8.\n\n- Check your version by:\n\n  ```bash\n  java --version\n  ```\n\n- Check all your installed Java versions by:\n\n  ```bash\n  /usr/libexec/java_home -V\n  ```\n\n- If you already have Java 11 but it's not set as the default, select the specific version by:\n\n  ```bash\n  export JAVA_HOME=$(/usr/libexec/java_home -v 11.0.22)\n  ```\n\n  (or another version of 11)",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-7/019_0e8bce921a_python-kafka-spark-submitsh-streamingpy-error-py4j.md"
+            },
+            {
+              "id": "5db9bca6a9",
+              "question": "Getting SIGILL in JRE when running latest kestra image on Mac M4 MacOS 15.2/3",
+              "sort_order": 13,
+              "content": "SIGILL in Java Runtime Environment on MacOS M4\n\nAdd the following environment variable to your Kestra container: `-e JAVA_OPTS=\"-XX:UseSVE=0\"`:\n\n```bash\ndocker run --rm -it \\\n  --pull=always \\\n  -p 8080:8080 \\\n  --user=root \\\n  -e JAVA_OPTS=\"-XX:UseSVE=0\" \\\n  -v /var/run/docker.sock:/var/run/docker.sock \\\n  -v /tmp:/tmp \\\n  kestra/kestra:latest server local\n```\nThe same in a Docker Compose file:\n\n```yaml\nservices:\n  kestra:\n    image: kestra/kestra:latest\n    environment:\n      JAVA_OPTS: \"-XX:UseSVE=0\"\n```",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-2/013_5db9bca6a9_getting-sigill-in-jre-when-running-latest-kestra-i.md"
+            }
+          ],
+          "tool_call_id": "call_gAVsQb1hhYuFnSIFwmQg74fN",
+          "metadata": null,
+          "timestamp": "2026-03-26T07:25:14.391944+00:00",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-03-26T07:25:14.393456+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "49f1c01b-996d-4180-8459-7106f5ac6467",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "content": "On an Apple Silicon Mac, you should set the `JAVA_HOME` environment variable to `/opt/homebrew/opt/openjdk/bin`. To do this, you can update your `.bashrc` or `.zshrc` file with the following commands:\n\n```bash\nexport JAVA_HOME=\"/opt/homebrew/opt/openjdk/bin\"\nexport PATH=\"$JAVA_HOME:$PATH\"\n```\n\nAfter updating the file, you can confirm that your path was correctly set by running:\n\n```bash\nwhich java\n```\n\nYou should expect to see the output like:\n\n```\n/opt/homebrew/opt/openjdk/bin/java\n```\n\nTo check your Java version, you can run:\n\n```bash\njava -version\n```\n\nThis configuration helps ensure that Java is correctly set up on your Mac. [Source: Setting JAVA_HOME with Homebrew on Apple Silicon](https://github.com/DataTalksClub/faq/blob/main/faq-main/_questions/data-engineering-zoomcamp/module-6/059_a5a8a6ac39_setting-java_home-with-homebrew-on-apple-silicon.md)",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 1743,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 223,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:25:18.577250+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "stop",
+        "timestamp": "2026-03-26T07:25:15+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNZNbOvYuNnAq6MlUMlRY1qsqrkEe",
+      "finish_reason": "stop",
+      "run_id": "49f1c01b-996d-4180-8459-7106f5ac6467",
+      "metadata": null
+    }
+  ],
+  "source": "ai-generated"
+}

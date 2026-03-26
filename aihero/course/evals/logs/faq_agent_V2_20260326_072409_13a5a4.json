@@ -1,0 +1,174 @@
+{
+  "agent_name": "faq_agent_V2",
+  "system_prompt": "['\\nYou are a helpful assistant for a course.\\n\\nUse the search tool to find relevant information from the course materials before answering questions.\\n\\nIf you can find specific information through search, use it to provide accurate answers.\\n\\nAlways include references by citing the filename of the source material you used.  \\nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\\n\\nIf the search doesn\\'t return relevant results, let the user know and provide general guidance.\\n']",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "text_search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "Where can I find my SSH config file on Windows?",
+          "timestamp": "2026-03-26T07:24:05.268417+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-03-26T07:24:05.268417+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "15f5458d-1ff0-4e38-b31a-7144019cf0d5",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "args": "{\"query\":\"SSH config file location on Windows\"}",
+          "tool_call_id": "call_4EtZCwmhhutNUoGrUmL3yDXp",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 220,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 19,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:24:06.965509+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "tool_calls",
+        "timestamp": "2026-03-26T07:24:06+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNZMU08lWkZ7y1RvraPOxKOfKjlZi",
+      "finish_reason": "tool_call",
+      "run_id": "15f5458d-1ff0-4e38-b31a-7144019cf0d5",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "content": [
+            {
+              "id": "10407876a1",
+              "question": "SSH Error: ssh: Could not resolve hostname linux: Name or service not known",
+              "sort_order": 130,
+              "content": "To resolve this, ensure that your config file is in `C/User/Username/.ssh/config`.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/130_10407876a1_ssh-error-ssh-could-not-resolve-hostname-linux-nam.md"
+            },
+            {
+              "id": "7889d2bad5",
+              "images": [
+                {
+                  "description": "image #1",
+                  "id": "image_1",
+                  "path": "images/data-engineering-zoomcamp/image_0f494026.png"
+                }
+              ],
+              "question": "SSH error in VS Code - \u201cCould not establish connection to \"de-zoomcamp\": Permission denied (publickey).\u201d",
+              "sort_order": 1,
+              "content": "If you are using Windows, try the following steps to resolve the error:\n\n1. Copy the `.ssh` folder from the Linux file path to Windows.\n2. In the `config` file, use:\n   \n   ```\n   IdentityFile C:\\Users\\<username>\\.ssh\\gcp\n   ```\n   \n   Instead of:\n   \n   ```\n   IdentityFile ~/.ssh/gcp\n   ```\n\n3. Ensure the private key file located at `C:\\Users\\<username>\\.ssh\\gcp` has an extra line at the end:\n\n   <{IMAGE:image_1}>",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-2/001_7889d2bad5_ssh-error-in-vs-code-could-not-establish-connectio.md"
+            },
+            {
+              "id": "16d0d756c3",
+              "question": "WSL: Could not resolve host name",
+              "sort_order": 58,
+              "content": "WSL2 may not be referencing the correct `.ssh/config` path from Windows. You can create a config file in the home directory of WSL2 by following these steps:\n\n1. Navigate to your home directory:\n   \n   ```bash\n   cd ~\n   ```\n\n2. Create the `.ssh` directory:\n   \n   ```bash\n   mkdir .ssh\n   ```\n\n3. Create a `config` file in the `.ssh` folder with the following content:\n\n   ```\n   HostName [GPC VM external IP]\n   User [username]\n   IdentityFile ~/.ssh/[private key]\n   ```",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/058_16d0d756c3_wsl-could-not-resolve-host-name.md"
+            },
+            {
+              "id": "73c8de600c",
+              "question": "WSL: Permissions too open at Windows",
+              "sort_order": 57,
+              "content": "Issue when trying to run the GPC VM through SSH via WSL2, likely because WSL2 isn\u2019t looking for .ssh keys in the correct folder. The command attempted:\n\n```bash\nssh -i gpc [username]@[my external IP]\n```\n\n### Solutions\n\n1. **Use `sudo` Command**\n   \n   Try using `sudo` before executing the command:\n   \n   ```bash\n   sudo ssh -i gpc [username]@[my external IP]\n   ```\n\n2. **Change Permissions**\n   \n   Navigate to your folder and change the permissions for the private key SSH file:\n   \n   ```bash\n   chmod 600 gpc\n   ```\n\n3. **Create a `.ssh` Folder in WSL2**\n   \n   - Navigate to your home directory:\n     \n     ```bash\n     cd ~\n     ```\n   \n   - Create a `.ssh` folder:\n     \n     ```bash\n     mkdir .ssh\n     ```\n   \n   - Copy the content from the Windows `.ssh` folder to the newly created `.ssh` folder:\n     \n     ```bash\n     cp -r /mnt/c/Users/YourUsername/.ssh/* ~/.ssh/\n     ```\n   \n   - Adjust the permissions of the files and folders in the `.ssh` directory if necessary.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/057_73c8de600c_wsl-permissions-too-open-at-windows.md"
+            },
+            {
+              "id": "eb759226aa",
+              "images": [
+                {
+                  "description": "image #1",
+                  "id": "image_1",
+                  "path": "images/data-engineering-zoomcamp/image_31ceb9bc.png"
+                }
+              ],
+              "question": "GCP: SSH public key error - multiple users / usernames",
+              "sort_order": 102,
+              "content": "Initially, I could not SSH into my VM from my Windows laptop. I thought it was because I did not follow the tutorial exactly. Instead of generating the SSH key using MINGW/git bash with the Linux-style command, I did it in Command Prompt using the Windows-style command. I kept getting a public key error.\n\n**Permanent Solution:**\n\nIt turns out it wasn\u2019t an issue with the key generation at all! The problem was with the username. I had given my SSH key a different username than what appeared in my VM (my Google account username). So, I had been trying to log in with `googleacctuser@[ipaddr]` instead of `mySSHuser@[ipaddr]`. Here's how I resolved it:\n\n1. Retraced my steps to check the SSH key setup in the GCP console, where it showed the user and SSH key.\n2. Changed the username to the correct one (googleacctuser) in my config file.\n3. Updated the config file and used `mySSHuser` to log in.\n\nNow, the issue was that I had created two users. I made all the installations and permissions on `googleacctuser`, not accessible from `mySSHuser`. Since I didn't need `mySSHuser`, I edited the SSH key to change the username at the end and updated the GCP console and config file accordingly.\n\nThen, I planned to delete the `mySSHuser` account in the VM terminal to keep things clean (though I got a bit attached, so I skipped this).\n\n**Temporary Solution:**\n\nBefore figuring out my issue, I used a shortcut by SSH'ing into the VM in the browser, which worked nicely for a while. But eventually, I needed to use VSCode.\n\n<{IMAGE:image_1}>",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/102_eb759226aa_gcp-ssh-public-key-error-multiple-users-usernames.md"
+            }
+          ],
+          "tool_call_id": "call_4EtZCwmhhutNUoGrUmL3yDXp",
+          "metadata": null,
+          "timestamp": "2026-03-26T07:24:06.971036+00:00",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-03-26T07:24:06.972038+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "15f5458d-1ff0-4e38-b31a-7144019cf0d5",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "content": "On Windows, your SSH config file can be found in the following directory:\n\n```\nC:\\Users\\<YourUsername>\\.ssh\\config\n```\n\nMake sure to replace `<YourUsername>` with your actual Windows username. If the `.ssh` directory does not exist, you may need to create it along with the `config` file if you haven't already done so.\n\nFor more details, you can refer to this [FAQ entry](https://github.com/DataTalksClub/faq/blob/main/faq-main/_questions/data-engineering-zoomcamp/module-1/130_10407876a1_ssh-error-ssh-could-not-resolve-hostname-linux-nam.md).",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 1668,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 140,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:24:09.864106+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "stop",
+        "timestamp": "2026-03-26T07:24:07+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNZMV1RPK3O2MlTneoDUUXnEDsnIQ",
+      "finish_reason": "stop",
+      "run_id": "15f5458d-1ff0-4e38-b31a-7144019cf0d5",
+      "metadata": null
+    }
+  ],
+  "source": "ai-generated"
+}

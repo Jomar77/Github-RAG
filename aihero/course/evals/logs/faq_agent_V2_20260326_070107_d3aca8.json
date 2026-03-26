@@ -1,0 +1,167 @@
+{
+  "agent_name": "faq_agent_V2",
+  "system_prompt": "['\\nYou are a helpful assistant for a course.\\n\\nUse the search tool to find relevant information from the course materials before answering questions.\\n\\nIf you can find specific information through search, use it to provide accurate answers.\\n\\nAlways include references by citing the filename of the source material you used.  \\nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\\n\\nIf the search doesn\\'t return relevant results, let the user know and provide general guidance.\\n']",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "text_search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "How do I set an environment variable for DLT_DATA_DIR in my shell?",
+          "timestamp": "2026-03-26T07:00:58.101901+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-03-26T07:00:58.101901+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "65016493-1ddb-4ee0-9d78-becb70bca53a",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "args": "{\"query\":\"set DLT_DATA_DIR environment variable\"}",
+          "tool_call_id": "call_n8bzKRFeLXxbwdJtCKnkglvj",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 225,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 20,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:00:59.465304+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "tool_calls",
+        "timestamp": "2026-03-26T07:00:58+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNZ06BKwkzqjdKfOckqulK6D0CdFJ",
+      "finish_reason": "tool_call",
+      "run_id": "65016493-1ddb-4ee0-9d78-becb70bca53a",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "content": [
+            {
+              "id": "fb43c209d9",
+              "question": "How to set environment variable easily for any credentials",
+              "sort_order": 74,
+              "content": "If you need to securely set up credentials for a project and intend to push it to a git repository, using an environment variable is a recommended option.\n\nFor example, for scripts like `web_to_gcs.py` or `git_csv_to_gcs.py`, you may need to set these variables:\n\n- `GOOGLE_APPLICATION_CREDENTIALS`\n- `GCP_GCS_BUCKET`\n\nThe easiest option to manage this is to use a `.env` file with [dotenv](https://pypi.org/project/python-dotenv/).\n\nTo install and utilize this package, follow these steps:\n\n1. Install `python-dotenv`:\n\n   ```bash\n   pip install python-dotenv\n   ```\n\n2. Add the following code to inject these variables into your project:\n\n   ```python\n   from dotenv import load_dotenv\n   import os\n\n   # Load environment variables from .env file\n   load_dotenv()\n\n   # Now you can access environment variables like GCP_GCS_BUCKET and GOOGLE_APPLICATION_CREDENTIALS\n   credentials_path = os.getenv(\"GOOGLE_APPLICATION_CREDENTIALS\")\n   BUCKET = os.environ.get(\"GCP_GCS_BUCKET\")\n   ```",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/074_fb43c209d9_how-to-set-environment-variable-easily-for-any-cre.md"
+            },
+            {
+              "id": "9abc27b002",
+              "question": "Kestra: Don\u2019t forget to set GCP_CREDS variable",
+              "sort_order": 17,
+              "content": "If you plan on using Kestra with Google Cloud Platform, make sure you set up the `GCP_CREDS` that will be used in flows with \"gcp\" in their name.\n\nTo set it:\n\n1. Go to **Namespaces** and select \"zoomcamp\" if you are using the examples from the lessons.\n2. In the **KV Store** tab, create a new key as `GCP_CREDS`.\n3. Set the type to JSON and paste the content of the `.json` file with credentials for the service account created.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-2/017_9abc27b002_kestra-dont-forget-to-set-gcp_creds-variable.md"
+            },
+            {
+              "id": "1075e9e2b6",
+              "question": "Make DLT comply with the XDG Base Dir Specification",
+              "sort_order": 10,
+              "content": "You can set the environment variable in your shell init script:\n\nFor Bash or ZSH:\n\n```bash\nexport DLT_DATA_DIR=$XDG_DATA_HOME/dlt\n```\n\nFor Fish (in `config.fish`):\n\n```bash\nset -x DLT_DATA_DIR \"$XDG_DATA_HOME/dlt\"\n```",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/workshop-1-dlthub/010_1075e9e2b6_make-dlt-comply-with-the-xdg-base-dir-specificatio.md"
+            },
+            {
+              "id": "d2add610e3",
+              "question": "How do I set up credentials to run dlt in my environment (not Google Colab)?",
+              "sort_order": 9,
+              "content": "You can set up credentials for `dlt` in several ways. Here are the two most common methods:\n\n### Environment Variables (Easiest)\n\nSet credentials via environment variables. For example, to configure Google Cloud credentials. This method avoids hardcoding secrets in your code and works seamlessly with most environments.\n\n### Configuration Files (Recommended for Local Use)\n\n- Use `.dlt/secrets.toml` for sensitive credentials and `.dlt/config.toml` for non-sensitive configurations.\n- Example for Google Cloud in `secrets.toml`:\n\n```toml\n[google_cloud]\nservice_account_key = \"YOUR_SERVICE_ACCOUNT_KEY\"\n```\n\n- Place these files in the `.dlt` folder of your project.\n\n### Additional Notes:\n\n- Never commit `secrets.toml` to version control (add it to `.gitignore`).\n- Credentials can also be loaded via vaults, AWS Parameter Store, or custom setups.\n\nFor additional methods and detailed information, refer to the [official dlt documentation](https://dlthub.com/docs/general-usage/credentials/)",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/workshop-1-dlthub/009_d2add610e3_how-do-i-set-up-credentials-to-run-dlt-in-my-envir.md"
+            },
+            {
+              "id": "3cc457b0de",
+              "images": [
+                {
+                  "description": "image #1",
+                  "id": "image_1",
+                  "path": "images/data-engineering-zoomcamp/image_71e1a1ed.png"
+                }
+              ],
+              "question": "DBT: I ran dbt run without specifying variable which gave me a table of 100 rows. I ran again with the variable value specified but my table still has 100 rows in BQ.",
+              "sort_order": 29,
+              "content": "Remove the dataset from BigQuery created by dbt and run again (with test disabled) to ensure the dataset created has all the rows.\n\nDBT: Why am I getting a new dataset after running my CI/CD Job? / What is this new dbt dataset in BigQuery?\n\nWhen you create the CI/CD job, under 'Compare Changes against an environment (Deferral)' make sure that you select 'No; do not defer to another environment'. Otherwise, dbt won\u2019t merge your dev models into production models; it will create a new environment called \u2018dbt_cloud_pr_number of pull request\u2019\n\n<{IMAGE:image_1}>",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/029_3cc457b0de_dbt-i-ran-dbt-run-without-specifying-variable-whic.md"
+            }
+          ],
+          "tool_call_id": "call_n8bzKRFeLXxbwdJtCKnkglvj",
+          "metadata": null,
+          "timestamp": "2026-03-26T07:00:59.468819+00:00",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-03-26T07:00:59.469830+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "65016493-1ddb-4ee0-9d78-becb70bca53a",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "content": "To set the environment variable `DLT_DATA_DIR` in your shell, you can follow these instructions based on the type of shell you are using:\n\n### For Bash or ZSH:\nAdd the following line to your shell initialization file (like `.bashrc` or `.zshrc`):\n```bash\nexport DLT_DATA_DIR=$XDG_DATA_HOME/dlt\n```\nAfter adding the line, remember to run `source ~/.bashrc` or `source ~/.zshrc` (depending on the file you edited) to apply the changes.\n\n### For Fish shell:\nIn your `config.fish` file, add this line:\n```fish\nset -x DLT_DATA_DIR \"$XDG_DATA_HOME/dlt\"\n```\n\nThis will set the `DLT_DATA_DIR` environment variable to the specified path in your shell.\n\nFor more details, you can refer to the source material [here](https://github.com/DataTalksClub/faq/blob/main/faq-main/_questions/data-engineering-zoomcamp/workshop-1-dlthub/010_1075e9e2b6_make-dlt-comply-with-the-xdg-base-dir-specificatio.md).",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 1519,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 242,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:01:07.113335+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "stop",
+        "timestamp": "2026-03-26T07:01:00+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNZ08Q5VQEH0ZE744AUWnxrTiIlY0",
+      "finish_reason": "stop",
+      "run_id": "65016493-1ddb-4ee0-9d78-becb70bca53a",
+      "metadata": null
+    }
+  ],
+  "source": "ai-generated"
+}

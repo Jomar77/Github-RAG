@@ -1,0 +1,160 @@
+{
+  "agent_name": "faq_agent_V2",
+  "system_prompt": "['\\nYou are a helpful assistant for a course.\\n\\nUse the search tool to find relevant information from the course materials before answering questions.\\n\\nIf you can find specific information through search, use it to provide accurate answers.\\n\\nAlways include references by citing the filename of the source material you used.  \\nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\\n\\nIf the search doesn\\'t return relevant results, let the user know and provide general guidance.\\n']",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "text_search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "How do I adjust the data directory path when using Postgres 18 in a Docker container?",
+          "timestamp": "2026-03-26T07:24:30.899294+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-03-26T07:24:30.899294+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "4791b24a-220a-40df-bc81-63bf5275d210",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "args": "{\"query\":\"adjust data directory path Postgres 18 Docker\"}",
+          "tool_call_id": "call_Icqemg35AEKZAXDCrjxez6CI",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 228,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 22,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:24:31.809018+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "tool_calls",
+        "timestamp": "2026-03-26T07:24:31+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNZMtqEciUJWIL0ZOTk6gf4F5hgew",
+      "finish_reason": "tool_call",
+      "run_id": "4791b24a-220a-40df-bc81-63bf5275d210",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "content": [
+            {
+              "id": "5f560784b0",
+              "question": "Postgres fails to start after upgrading from postgres:16 to postgres:18 in Docker",
+              "sort_order": 137,
+              "content": "Postgres 18 changes how the data directory is structured inside Docker containers. While Postgres \u226416 stored data under /var/lib/postgresql/data, Postgres 18 expects the volume to be mounted at /var/lib/postgresql. If an existing volume created with an older Postgres version is reused without updating the mount path, Postgres 18 will detect an incompatible layout and exit during startup. This can appear as DNS resolution errors or failed connections from pgAdmin or ingestion jobs. For Week 1 setups, the fix is to update the volume mount path, remove the old volume, and recreate the containers so Postgres 18 can initialize a new data directory.\n\n## Proposed Fix (Week 1 setups)\n- Update the volume mount path to /var/lib/postgresql (instead of /var/lib/postgresql/data).\n- Remove the old volume that was created with Postgres 16.\n- Recreate the containers so Postgres 18 initializes a fresh data directory.\n\n### Example commands\n- Running with docker run (adjust as needed):\n```\ndocker run -it \\\n  -e POSTGRES_USER=\"root\" \\\n  -e POSTGRES_PASSWORD=\"admin\" \\\n  -e POSTGRES_DB=\"ny_taxi\" \\\n  -v \"/path/to/ny_taxi_postgres_data\":\"/var/lib/postgresql\" \\\n  -p 5432:5432 \\\n  postgres:18\n```\n\n- For docker-compose, mount the volume to /var/lib/postgresql:\n```\nvolumes:\n  ny_taxi_postgres_data:\n\nservices:\n  postgres:\n    image: postgres:18\n    environment:\n      POSTGRES_USER: root\n      POSTGRES_PASSWORD: admin\n      POSTGRES_DB: ny_taxi\n    volumes:\n      - ny_taxi_postgres_data:/var/lib/postgresql\n```\n\n- Remove the old volume (list and remove):\n```\ndocker volume ls\ndocker volume rm <old-volume-name>\n```\n\n- Recreate containers:\n```\ndocker-compose down\ndocker-compose up -d\n```\n\n### Notes\n- Ensure you have a backup of any important data before removing volumes.\n- After restarting, verify that Postgres starts and the data directory is initialized under /var/lib/postgresql.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/137_5f560784b0_postgres-18-startup-after-upgrade.md"
+            },
+            {
+              "id": "5bd34587a0",
+              "question": "WSL: Docker directory permissions error",
+              "sort_order": 54,
+              "content": "```\ninitdb: error: could not change permissions of directory\n```\n\nWSL and Windows do not manage permissions in the same way, causing conflict if using the Windows file system rather than the WSL file system.\n\nSolution:  **Use Docker volumes.**\n\nVolume is used for storage of persistent data and not for transferring files. A local volume is unnecessary.\n\nThis resolves permission issues and allows for better management of volumes.\n\n**Note:** The `user:` is not necessary if using Docker volumes but is required if using a local drive.\n\n\n```yaml\nservices:\n  postgres:\n    image: postgres:15-alpine\n    container_name: postgres\n    user: \"0:0\"\n    environment:\n      - POSTGRES_USER=postgres\n      - POSTGRES_PASSWORD=postgres\n      - POSTGRES_DB=ny_taxi\n    volumes:\n      - \"pg-data:/var/lib/postgresql/data\"\n    ports:\n      - \"5432:5432\"\n    networks:\n      - pg-network\n\n  pgadmin:\n    image: dpage/pgadmin4\n    container_name: pgadmin\n    user: \"${UID}:${GID}\"\n    environment:\n      - PGADMIN_DEFAULT_EMAIL=email@some-site.com\n      - PGADMIN_DEFAULT_PASSWORD=pgadmin\n    volumes:\n      - \"pg-admin:/var/lib/pgadmin\"\n    ports:\n      - \"8080:80\"\n    networks:\n      - pg-network\n\nnetworks:\n  pg-network:\n    name: pg-network\n\nvolumes:\n  pg-data:\n  pg-admin:\n```",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/054_5bd34587a0_wsl-docker-directory-permissions-error.md"
+            },
+            {
+              "id": "ef201a0b0b",
+              "question": "Docker - Could not change permissions of directory \"/var/lib/postgresql/data\": Operation not permitted",
+              "sort_order": 21,
+              "content": "```bash\ndocker run -it \\\n  -e POSTGRES_USER=\"root\" \\\n  -e POSTGRES_PASSWORD=\"admin\" \\\n  -e POSTGRES_DB=\"ny_taxi\" \\\n  -v \"/mnt/path/to/ny_taxi_postgres_data\":\"/var/lib/postgresql/data\" \\\n  -p 5432:5432 \\\n  postgres:13\n```\n\n**Error Message:**\n\n```plaintext\nThe files belonging to this database system will be owned by user \"postgres\". \nThe database cluster will be initialized with locale \"en_US.utf8\". \nThe default database encoding has accordingly been set to \"UTF8\". \nData page checksums are disabled.\nfixing permissions on existing directory /var/lib/postgresql/data ...\ninitdb: error: could not change permissions of directory \"/var/lib/postgresql/data\": Operation not permitted\n```\n\n**Solution:**\n\n1. Create a local Docker volume and map it to the Postgres data directory `/var/lib/postgresql/data`.\n   \n   - The volume name `dtc_postgres_volume_local` must match in both commands below:\n\n    ```bash\n    docker volume create --name dtc_postgres_volume_local -d local\n    ```\n\n2. Run the Docker container using the created volume:\n\n    ```bash\n    docker run -it \\\n      -e POSTGRES_USER=\"root\" \\\n      -e POSTGRES_PASSWORD=\"root\" \\\n      -e POSTGRES_DB=\"ny_taxi\" \\\n      -v dtc_postgres_volume_local:/var/lib/postgresql/data \\\n      -p 5432:5432 \\\n      postgres:13\n    ```\n\n3. Verify the command works in Docker Desktop under Volumes. The `dtc_postgres_volume_local` should be listed, but the folder `ny_taxi_postgres_data` will be empty as an alternative configuration is used.\n\n**Alternate Error:**\n\n```plaintext\ninitdb: error: directory \"/var/lib/postgresql/data\" exists but is not empty\n```\n\nTo resolve this, either remove or empty the directory \"/var/lib/postgresql/data\", or run `initdb`.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/021_ef201a0b0b_docker-could-not-change-permissions-of-directory-v.md"
+            },
+            {
+              "id": "d3c860aa46",
+              "question": "Docker: Postgres container fails to launch with exit code (1) when attempting to compose",
+              "sort_order": 53,
+              "content": "This issue arises because the Postgres database is not initialized before executing `docker-compose up -d`. While there are other potential solutions [discussed in this thread](https://forums.docker.com/t/one-of-the-postgres-containers-stops-as-soon-as-it-starts/74714/3), you can resolve it by initializing the database first. Then, the Docker Compose will work as expected.\n\n```bash\ndocker run -it \\\n  -e POSTGRES_USER=\"root\" \\\n  -e POSTGRES_PASSWORD=\"root\" \\\n  -e POSTGRES_DB=\"ny_taxi\" \\\n  -v $(pwd)/ny_taxi_data:/var/lib/postgresql/data \\\n  -p 5432:5432 \\\n  --network=pg-network \\\n  --name=pg_database \\\n  postgres:13\n```",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/053_d3c860aa46_docker-postgres-container-fails-to-launch-with-exi.md"
+            },
+            {
+              "id": "9ef838bb46",
+              "question": "Docker: Compose up -d error getting credentials - err: exec: \"docker-credential-desktop\": executable file not found in %PATH%, out: ``",
+              "sort_order": 49,
+              "content": "To resolve this error, follow these steps:\n\n1. Locate the `config.json` file for Docker, typically found in your home directory at `Users/username/.docker`.\n2. Modify the `credsStore` setting to `credStore`.\n3. Save the file and re-run your Docker Compose command.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/049_9ef838bb46_docker-compose-up-d-error-getting-credentials-err.md"
+            }
+          ],
+          "tool_call_id": "call_Icqemg35AEKZAXDCrjxez6CI",
+          "metadata": null,
+          "timestamp": "2026-03-26T07:24:31.813559+00:00",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-03-26T07:24:31.813559+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "4791b24a-220a-40df-bc81-63bf5275d210",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "content": "To adjust the data directory path when using PostgreSQL 18 in a Docker container, you need to change the volume mount path. In PostgreSQL 18, the expected data directory is `/var/lib/postgresql`, rather than `/var/lib/postgresql/data` which was the case in earlier versions.\n\nHere are the necessary steps to achieve this:\n\n1. **Update the Volume Path**: Change the mount path to `/var/lib/postgresql`.\n   \n   Example command using `docker run`:\n   ```bash\n   docker run -it \\\n     -e POSTGRES_USER=\"root\" \\\n     -e POSTGRES_PASSWORD=\"admin\" \\\n     -e POSTGRES_DB=\"ny_taxi\" \\\n     -v \"/path/to/ny_taxi_postgres_data:/var/lib/postgresql\" \\\n     -p 5432:5432 \\\n     postgres:18\n   ```\n\n   Example for `docker-compose`:\n   ```yaml\n   volumes:\n     ny_taxi_postgres_data:\n\n   services:\n     postgres:\n       image: postgres:18\n       environment:\n         POSTGRES_USER: root\n         POSTGRES_PASSWORD: admin\n         POSTGRES_DB: ny_taxi\n       volumes:\n         - ny_taxi_postgres_data:/var/lib/postgresql\n   ```\n\n2. **Remove Old Volume**: If you have an existing volume created with an older version of PostgreSQL, you should remove that volume to prevent conflicts:\n\n   ```bash\n   docker volume ls          # List your volumes\n   docker volume rm <old-volume-name>  # Remove the old volume\n   ```\n\n3. **Recreate Containers**: After making these changes and removing the old volume, recreate your containers to allow PostgreSQL 18 to initialize:\n\n   ```bash\n   docker-compose down\n   docker-compose up -d\n   ```\n\nMake sure to back up any important data before removing volumes. After following these steps, verify that PostgreSQL starts correctly with the new data directory configuration. \n\nFor more details, you can refer to the original source [here](https://github.com/DataTalksClub/faq/blob/main/faq-main/_questions/data-engineering-zoomcamp/module-1/137_5f560784b0_postgres-18-startup-after-upgrade.md).",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 2255,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 467,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:24:41.066700+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "stop",
+        "timestamp": "2026-03-26T07:24:32+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNZMuchxhzNOuAuCLJUXi23cL62TI",
+      "finish_reason": "stop",
+      "run_id": "4791b24a-220a-40df-bc81-63bf5275d210",
+      "metadata": null
+    }
+  ],
+  "source": "ai-generated"
+}

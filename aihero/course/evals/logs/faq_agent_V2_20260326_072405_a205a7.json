@@ -1,0 +1,160 @@
+{
+  "agent_name": "faq_agent_V2",
+  "system_prompt": "['\\nYou are a helpful assistant for a course.\\n\\nUse the search tool to find relevant information from the course materials before answering questions.\\n\\nIf you can find specific information through search, use it to provide accurate answers.\\n\\nAlways include references by citing the filename of the source material you used.  \\nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\\n\\nIf the search doesn\\'t return relevant results, let the user know and provide general guidance.\\n']",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "text_search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "Why should I add the `.env_encoded` file to my `.gitignore`?",
+          "timestamp": "2026-03-26T07:23:57.398372+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-03-26T07:23:57.398372+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "fd9d2e9d-5791-471d-8b22-67c2421b51e4",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "args": "{\"query\":\".env_encoded .gitignore\"}",
+          "tool_call_id": "call_KzGBLscypqAGl3ofCxVSlSB5",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 226,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 19,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:23:58.573010+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "tool_calls",
+        "timestamp": "2026-03-26T07:23:58+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNZMMIJJTcXWOleeaG6ahrfAYNhZ9",
+      "finish_reason": "tool_call",
+      "run_id": "fd9d2e9d-5791-471d-8b22-67c2421b51e4",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "content": [
+            {
+              "id": "a489fb34ac",
+              "question": "Should I include my .env_encoded file in my .gitignore?",
+              "sort_order": 12,
+              "content": "Yes, you should definitely include the `.env_encoded` file in your `.gitignore` file. Here's why:\n\n- **Security:** The `.env_encoded` file contains sensitive information, namely the base64 encoded version of your GCP Service Account key. Even though it's encoded, it's not secure to share this in a public repository as anyone can decode it back to the original JSON.\n\n- **Best Practices:** It's common practice to avoid committing environment files or any files containing secrets to version control systems like Git. This prevents accidental exposure of sensitive data.\n\n### How to do it:\n\n- Add this line to your `.gitignore`:\n\n  ```\n  .env_encoded\n  ```\n\n### More on Security\n\nBase64 encoding is easily reversible. Base64 is an encoding scheme, not an encryption method. It's designed to encode binary data into ASCII characters that can be safely transmitted over systems that are designed to deal with text. Here's why it's not secure for protecting sensitive information:\n\n- **Reversibility:** Base64 encoding simply translates binary data into a text string using a specific set of 64 characters. Decoding it back to the original data is straightforward and doesn't require any secret key or password.\n\n- **Public Availability of Tools:** Numerous online tools, software libraries, and command-line utilities exist that can decode base64 with just a few clicks or commands.\n\n- **No Security:** Since base64 encoding does not change or hide the actual content of the data, anyone with access to the encoded string can decode it back to the original data.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-2/012_a489fb34ac_should-i-include-my-env_encoded-file-in-my-gitigno.md"
+            },
+            {
+              "id": "dc06a38bc6",
+              "question": "How do I use Git / GitHub for this course?",
+              "sort_order": 42,
+              "content": "After you create a GitHub account, clone the course repo to your local machine using the process outlined in this video:\n\n[Git for Everybody: How to Clone a Repository from GitHub](https://www.youtube.com/watch?v=CKcqniGu3tA).\n\nHaving this local repository on your computer will make it easy to access the instructors\u2019 code and make pull requests if you want to add your own notes or make changes to the course content.\n\nYou will probably also create your own repositories to host your notes and versions of files. Here is a great tutorial that shows you how to do this:\n\n[How to Create a Git Repository](https://www.atlassian.com/git/tutorials/setting-up-a-repository).\n\nRemember to ignore large databases, .csv, and .gz files, and other files that should not be saved to a repository. Use `.gitignore` for this:\n\n[.gitignore file](https://www.atlassian.com/git/tutorials/saving-changes/gitignore).\n\n**Important:**\n\n**NEVER store passwords or keys in a git repo** (even if the repo is set to private). Put files containing sensitive information (.env, secret.json, etc.) in your `.gitignore`.\n\nThis is also a great resource: [Dangit, Git!?!](https://dangitgit.com/)",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/general/042_dc06a38bc6_how-do-i-use-git-github-for-this-course.md"
+            },
+            {
+              "id": "aeaede4fd1",
+              "question": "How do I properly authenticate a Google Cloud Service Account in Kestra?",
+              "sort_order": 11,
+              "content": "Several authentication methods are available; here are some of the most straightforward approaches:\n\n### Method 1:\n\nUpdate your `docker-compose.yml` file as needed.\n\n### Method 2:\n\n1. **Store the Service Account as a Secret**  \n   Run this command, specifying the correct path to your `service-account.json` file and `.env_encoded`:\n\n   ```bash\n   # Example command: Adjust according to your environment\n   base64 /path/to/service-account.json > .env_encoded\n   ```\n\n2. **Modify `docker-compose.yml` to Include the Encoded Secrets**  \n   Insert the relevant configuration within your `docker-compose.yml`.\n\n3. **Configure Kestra Plugin Defaults**  \n   This ensures all GCP tasks use the secret automatically.\n\n4. **Verify it\u2019s Working in a Testing GCP Workflow**\n\nSee also related FAQs on updating the service account key, using secrets, and applying this method to other GCP tasks.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-2/011_aeaede4fd1_how-do-i-properly-authenticate-a-google-cloud-serv.md"
+            },
+            {
+              "id": "2d17397995",
+              "question": "Compilation Error: Model '<model_name>' (<model_path>) depends on a node named '<seed_name>' which was not found (Production Environment)",
+              "sort_order": 44,
+              "content": "Make sure that you create a pull request from your Development branch to the Production branch (main by default). After that, check in your `seeds` folder to ensure the seed file is inside it. Another thing to check is your `.gitignore` file. Make sure that the `.csv` extension is not included.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/044_2d17397995_compilation-error-model-model_name-model_path-depe.md"
+            },
+            {
+              "id": "9c40a115f8",
+              "question": "\u2018taxi_zone_lookup\u2019 not found",
+              "sort_order": 48,
+              "content": "Check the `.gitignore` file and make sure you don\u2019t have `*.csv` in it.\n\nIf you're encountering a dbt error with the following message:\n\n```\nRuntime Error in rpc request (from remote system.sql)\n404 Not found: Table dtc-de-0315:trips_data_all.green_tripdata_partitioned was not found in location europe-west6\nLocation: europe-west6\nJob ID: 168ee9bd-07cd-4ca4-9ee0-4f6b0f33897c\n```\n\n- Verify that all your datasets are configured with the correct region. For example, use `europe-west6` instead of a general region like `EU`.\n- To update the region in dbt settings:\n  - Go to `dbt -> projects -> optional settings` \n  - Manually set the location to match the required region.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/048_9c40a115f8_taxi_zone_lookup-not-found.md"
+            }
+          ],
+          "tool_call_id": "call_KzGBLscypqAGl3ofCxVSlSB5",
+          "metadata": null,
+          "timestamp": "2026-03-26T07:23:58.584061+00:00",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-03-26T07:23:58.585072+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "fd9d2e9d-5791-471d-8b22-67c2421b51e4",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "content": "You should add the `.env_encoded` file to your `.gitignore` for several important reasons:\n\n1. **Security**: The `.env_encoded` file contains sensitive information, such as the base64 encoded version of your GCP Service Account key. Even though it is encoded, sharing it in a public repository is unsafe because anyone can easily decode it back to the original JSON.\n\n2. **Best Practices**: It is a common best practice to avoid committing files that contain sensitive data to version control. This minimizes the risk of accidental exposure of sensitive information.\n\n3. **Base64 Encoding is Not Secure**: It's important to note that base64 encoding is not a secure method of protecting sensitive information. Encoding is reversible, meaning anyone who has access to the encoded file can decode it easily. \n\nTo ignore this file, you can simply add the following line to your `.gitignore`:\n\n```plaintext\n.env_encoded\n```\n\nThis helps ensure that sensitive information remains confidential and reduces the risk of data leaks [source](https://github.com/DataTalksClub/faq/blob/main/faq-main/_questions/data-engineering-zoomcamp/module-2/012_a489fb34ac_should-i-include-my-env_encoded-file-in-my-gitigno.md).",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 1702,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 255,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:24:05.232922+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "stop",
+        "timestamp": "2026-03-26T07:23:59+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNZMNEdEF8NbAUn8WRharYWlqYgcG",
+      "finish_reason": "stop",
+      "run_id": "fd9d2e9d-5791-471d-8b22-67c2421b51e4",
+      "metadata": null
+    }
+  ],
+  "source": "ai-generated"
+}

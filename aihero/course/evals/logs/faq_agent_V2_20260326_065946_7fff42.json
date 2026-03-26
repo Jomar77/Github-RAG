@@ -1,0 +1,160 @@
+{
+  "agent_name": "faq_agent_V2",
+  "system_prompt": "['\\nYou are a helpful assistant for a course.\\n\\nUse the search tool to find relevant information from the course materials before answering questions.\\n\\nIf you can find specific information through search, use it to provide accurate answers.\\n\\nAlways include references by citing the filename of the source material you used.  \\nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\\n\\nIf the search doesn\\'t return relevant results, let the user know and provide general guidance.\\n']",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "text_search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "How many hours a week should I expect to spend on this data engineering course?",
+          "timestamp": "2026-03-26T06:59:42.799666+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-03-26T06:59:42.799666+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "9f2c904a-c0cb-43a9-916a-35067ec42a7f",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "args": "{\"query\":\"hours per week data engineering course\"}",
+          "tool_call_id": "call_oj9BsXMW4TOuGzvxEJsVYcqb",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 225,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 19,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T06:59:43.749448+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "tool_calls",
+        "timestamp": "2026-03-26T06:59:43+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNYyt90E4Vywdi3q0PIqWG8q9dxS4",
+      "finish_reason": "tool_call",
+      "run_id": "9f2c904a-c0cb-43a9-916a-35067ec42a7f",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "content": [
+            {
+              "id": "316180784f",
+              "question": "Course: How many hours per week am I expected to spend on this course?",
+              "sort_order": 11,
+              "content": "It depends on your background and previous experience with modules. It is expected to require about 5 - 15 hours per week.\n\nYou can also calculate it yourself using [this data](https://github.com/DataTalksClub/zoomcamp-analytics/tree/main/data/de-zoomcamp-2023) and then update this answer.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/general/011_316180784f_course-how-many-hours-per-week-am-i-expected-to-sp.md"
+            },
+            {
+              "id": "bfafa427b3",
+              "question": "Course: What are the prerequisites for this course?",
+              "sort_order": 2,
+              "content": "To get the most out of this course, you should have:\n\n- Basic coding experience\n- Familiarity with SQL\n- Experience with Python (helpful but not required)\n\nNo prior data engineering experience is necessary. See [Readme on GitHub](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/README.md#prerequisites).",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/general/002_bfafa427b3_course-what-are-the-prerequisites-for-this-course.md"
+            },
+            {
+              "id": "a411de5004",
+              "question": "Office Hours: I can\u2019t attend the \u201cOffice hours\u201d / workshop, will it be recorded?",
+              "sort_order": 12,
+              "content": "Yes! Every \"Office Hours\" will be recorded and available a few minutes after the live session is over; so you can view (or rewatch) whenever you want.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/general/012_a411de5004_office-hours-i-cant-attend-the-office-hours-worksh.md"
+            },
+            {
+              "id": "1da0437718",
+              "question": "Homework: how to convert the time difference of two timestamps to hours",
+              "sort_order": 53,
+              "content": "Pyspark converts the difference of two `TimestampType` values to Python's native `datetime.timedelta` object. The `timedelta` object stores the duration in terms of days, seconds, and microseconds. Each of these units must be manually converted into hours to express the total duration between the two timestamps using only hours.\n\nAnother method to achieve this is using the `datediff` SQL function. It requires the following parameters:\n\n- **Upper Date**: The closer date, e.g., `dropoff_datetime`.\n- **Lower Date**: The farther date, e.g., `pickup_datetime`.\n\nThe result is returned in days, so you can multiply the result by 24 to get the duration in hours.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-6/053_1da0437718_homework-how-to-convert-the-time-difference-of-two.md"
+            },
+            {
+              "id": "9e508f2212",
+              "question": "Course: When does the course start?",
+              "sort_order": 1,
+              "content": "The next cohort starts January 12th, 2026. More info at [DTC](https://datatalks.club/blog/guide-to-free-online-courses-at-datatalks-club.html).\n\n- Register before the course starts using this [link](https://airtable.com/shr6oVXeQvSI5HuWD).\n- Join the [course Telegram channel with announcements](https://t.me/dezoomcamp).\n- Don\u2019t forget to register in DataTalks.Club's Slack and [join](https://datatalks.club/docs/general/slack/) the channel.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/general/001_9e508f2212_course-when-does-the-course-start.md"
+            }
+          ],
+          "tool_call_id": "call_oj9BsXMW4TOuGzvxEJsVYcqb",
+          "metadata": null,
+          "timestamp": "2026-03-26T06:59:43.753446+00:00",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-03-26T06:59:43.753446+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "9f2c904a-c0cb-43a9-916a-35067ec42a7f",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "content": "You should expect to spend about **5 to 15 hours per week** on this data engineering course. The specific time investment can vary based on your background and previous experience with the modules. \n\nFor further details, you can check the original source [here](https://github.com/DataTalksClub/faq/blob/main/faq-main/_questions/data-engineering-zoomcamp/general/011_316180784f_course-how-many-hours-per-week-am-i-expected-to-sp.md).",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 1052,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 98,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T06:59:46.026866+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "stop",
+        "timestamp": "2026-03-26T06:59:44+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNYyunBdNxHruTGNccrIvPyhdlKIh",
+      "finish_reason": "stop",
+      "run_id": "9f2c904a-c0cb-43a9-916a-35067ec42a7f",
+      "metadata": null
+    }
+  ],
+  "source": "ai-generated"
+}

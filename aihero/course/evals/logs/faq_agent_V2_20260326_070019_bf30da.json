@@ -1,0 +1,167 @@
+{
+  "agent_name": "faq_agent_V2",
+  "system_prompt": "['\\nYou are a helpful assistant for a course.\\n\\nUse the search tool to find relevant information from the course materials before answering questions.\\n\\nIf you can find specific information through search, use it to provide accurate answers.\\n\\nAlways include references by citing the filename of the source material you used.  \\nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\\n\\nIf the search doesn\\'t return relevant results, let the user know and provide general guidance.\\n']",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "text_search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "Can you give me tips on saving queries in the BigQuery SQL Editor to avoid loss of work?",
+          "timestamp": "2026-03-26T07:00:07.005738+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-03-26T07:00:07.005738+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "834745f5-de5a-418f-bb6f-e0171230007f",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "args": "{\"query\":\"saving queries BigQuery SQL Editor\"}",
+          "tool_call_id": "call_eWAC5knLBhzJxyYwLMKFhG1n",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 229,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 19,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:00:10.107374+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "tool_calls",
+        "timestamp": "2026-03-26T07:00:08+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNYzIqgwlmRgUg3zIxNGFXdZHg6S4",
+      "finish_reason": "tool_call",
+      "run_id": "834745f5-de5a-418f-bb6f-e0171230007f",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "content": [
+            {
+              "id": "b98d573ce2",
+              "images": [
+                {
+                  "description": "image #1",
+                  "id": "image_1",
+                  "path": "images/data-engineering-zoomcamp/image_85e101a4.png"
+                }
+              ],
+              "question": "GCP BQ: Remember to save your queries",
+              "sort_order": 12,
+              "content": "It's important to save your progress in the BigQuery SQL Editor frequently.\n\nHere are some tips:\n\n- **Save Regularly:** Use the save button at the top bar in the BigQuery SQL Editor. Your saved queries will be available on the left panel.\n\n  <{IMAGE:image_1}>\n\n- **Alternative Method:** Copy and paste your queries into a file using a text editor like Notepad++ or VS Code. Save it with a `.sql` extension to benefit from syntax highlighting.\n\nBy following these methods, you can avoid losing your work in case of unexpected browser issues.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-3/012_b98d573ce2_gcp-bq-remember-to-save-your-queries.md"
+            },
+            {
+              "id": "b024daf322",
+              "question": "Which type of SQL is used in Spark? Postgres? MySQL? SQL Server?",
+              "sort_order": 19,
+              "content": "Spark uses its own type of SQL, known as Spark SQL.\n\nThe SQL syntax across various providers is generally similar, as shown below:\n\n```sql\nSELECT [attributes]\nFROM [table]\nWHERE [filter]\nGROUP BY [grouping attributes]\nHAVING [filtering the groups]\nORDER BY [attribute to order]\n(INNER/FULL/LEFT/RIGHT) JOIN [table2]\nON [attributes table joining table2] (...)\n```\n\nWhat differs most between SQL providers are the built-in functions.\n\nFor built-in Spark SQL functions, check this link: [Spark SQL Functions](https://spark.apache.org/docs/latest/api/sql/index.html)\n\nExtra information on Spark SQL:\n\n[What is Spark SQL?](https://databricks.com/glossary/what-is-spark-sql#:~:text=Spark%20SQL%20is%20a%20Spark,on%20existing%20deployments%20and%20data)",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-6/019_b024daf322_which-type-of-sql-is-used-in-spark-postgres-mysql.md"
+            },
+            {
+              "id": "a340ad48c5",
+              "question": "Spark fails when reading from BigQuery and using `.show()` on `SELECT` queries",
+              "sort_order": 23,
+              "content": "I got it working using `gcs-connector-hadoop-2.2.5-shaded.jar` and Spark 3.1.\n\nI also added the `google_credentials.json` and `.p12` to authenticate with GCS. These files are downloadable from the GCP Service account.\n\nTo create the SparkSession:\n\n```python\nspark = SparkSession.builder.master('local[*]') \\\n    .appName('spark-read-from-bigquery') \\\n    .config('BigQueryProjectId', 'razor-project-xxxxxxx') \\\n    .config('BigQueryDatasetLocation', 'de_final_data') \\\n    .config('parentProject', 'razor-project-xxxxxxx') \\\n    .config(\"google.cloud.auth.service.account.enable\", \"true\") \\\n    .config(\"credentialsFile\", \"google_credentials.json\") \\\n    .config(\"GcpJsonKeyFile\", \"google_credentials.json\") \\\n    .config(\"spark.driver.memory\", \"4g\") \\\n    .config(\"spark.executor.memory\", \"2g\") \\\n    .config(\"spark.memory.offHeap.enabled\", True) \\\n    .config(\"spark.memory.offHeap.size\", \"5g\") \\\n    .config('google.cloud.auth.service.account.json.keyfile', \"google_credentials.json\") \\\n    .config(\"fs.gs.project.id\", \"razor-project-xxxxxxx\") \\\n    .config(\"fs.gs.impl\", \"com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem\") \\\n    .config(\"fs.AbstractFileSystem.gs.impl\", \"com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS\") \\\n    .getOrCreate()\n```",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-6/023_a340ad48c5_spark-fails-when-reading-from-bigquery-and-using-s.md"
+            },
+            {
+              "id": "5a1a61b6a8",
+              "question": "BigQuery returns an error when I try to run the dm_monthly_zone_revenue.sql model.",
+              "sort_order": 26,
+              "content": "After the second SELECT, change this line:\n\n```sql\n date_trunc('month', pickup_datetime) as revenue_month,\n```\n\nTo this line:\n\n```sql\n date_trunc(pickup_datetime, month) as revenue_month,\n```\n\nMake sure that \"month\" isn\u2019t surrounded by quotes!",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/026_5a1a61b6a8_bigquery-returns-an-error-when-i-try-to-run-the-dm.md"
+            },
+            {
+              "id": "0131ac93ac",
+              "question": "GCP: Caution in using BigQuery - bigquery:no",
+              "sort_order": 9,
+              "content": "Use BigQuery carefully:\n\n- I created my BigQuery dataset on an account where my free trial was exhausted and received a bill of $80.\n- Use BigQuery under free credits and destroy all the datasets after creation.\n- Check your billing daily, especially if you've spun up a VM.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-3/009_0131ac93ac_gcp-caution-in-using-bigquery-bigqueryno.md"
+            }
+          ],
+          "tool_call_id": "call_eWAC5knLBhzJxyYwLMKFhG1n",
+          "metadata": null,
+          "timestamp": "2026-03-26T07:00:10.111368+00:00",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-03-26T07:00:10.111368+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "834745f5-de5a-418f-bb6f-e0171230007f",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "content": "To avoid losing your work in the BigQuery SQL Editor, here are some tips you can follow:\n\n1. **Save Regularly**: Make use of the save button located at the top bar in the BigQuery SQL Editor. Your saved queries will be accessible in the left panel.\n\n   ![BigQuery Save Button](https://github.com/DataTalksClub/faq/blob/main/faq-main/images/data-engineering-zoomcamp/image_85e101a4.png)\n\n2. **Alternative Method**: Consider copying and pasting your SQL queries into a text editor, such as Notepad++ or Visual Studio Code. Save the file with a `.sql` extension, which will allow you to benefit from syntax highlighting.\n\nBy implementing these strategies, you can safeguard your work against unexpected issues in the browser.\n\nFor more information, you can refer to this resource: [GCP BQ: Remember to save your queries](https://github.com/DataTalksClub/faq/blob/main/faq-main/_questions/data-engineering-zoomcamp/module-3/012_b98d573ce2_gcp-bq-remember-to-save-your-queries.md).",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 1507,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 234,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:00:19.824720+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "stop",
+        "timestamp": "2026-03-26T07:00:10+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNYzK4qLWHMeToOvM24aKoo3wZ8Gi",
+      "finish_reason": "stop",
+      "run_id": "834745f5-de5a-418f-bb6f-e0171230007f",
+      "metadata": null
+    }
+  ],
+  "source": "ai-generated"
+}

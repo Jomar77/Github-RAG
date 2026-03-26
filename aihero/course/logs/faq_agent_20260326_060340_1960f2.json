@@ -1,0 +1,162 @@
+{
+  "agent_name": "faq_agent",
+  "system_prompt": [
+    "\nYou are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\nIf the search doesn't return relevant results, let the user know and provide general guidance.\n"
+  ],
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "text_search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "how do I install kafka in python",
+          "timestamp": "2026-03-26T06:03:32.690504+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-03-26T06:03:32.690504+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "f7ec0cc7-2ea1-41b0-9977-fb058b755309",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "args": "{\"query\":\"install kafka in python\"}",
+          "tool_call_id": "call_ahAyK5k5daqmj7P4K73ld7Ag",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 156,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 17,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T06:03:35.220033+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "tool_calls",
+        "timestamp": "2026-03-26T06:03:35+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNY6ZPeLXagaX4aJD2w8ZlOe8wYRr",
+      "finish_reason": "tool_call",
+      "run_id": "f7ec0cc7-2ea1-41b0-9977-fb058b755309",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "content": [
+            {
+              "id": "2763850d3e",
+              "question": "Python Kafka: Installing dependencies for python3 06-streaming/python/avro_example/producer.py",
+              "sort_order": 21,
+              "content": "To install the necessary dependencies for running `producer.py` in the `avro_example` directory, use the following commands:\n\n- Install `confluent-kafka`:\n  - Using pip:\n  ```bash\n  pip install confluent-kafka\n  ```\n  - Using conda:\n  ```bash\n  conda install conda-forge::python-confluent-kafka\n  ```\n\n- Install `fastavro`:\n  ```bash\n  pip install fastavro\n  ```",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-7/021_2763850d3e_python-kafka-installing-dependencies-for-python3-0.md"
+            },
+            {
+              "id": "44cc6eaa10",
+              "question": "Error while running python3 stream.py worker",
+              "sort_order": 6,
+              "content": "If you get an error while running the command `python3 stream.py worker`, follow these steps:\n\n1. Uninstall the current `kafka-python` package:\n   \n   ```bash\n   pip uninstall kafka-python\n   ```\n\n2. Install the specific version of `kafka-python`:\n\n   ```bash\n   pip install kafka-python==1.4.6\n   ```",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-7/006_44cc6eaa10_error-while-running-python3-streampy-worker.md"
+            },
+            {
+              "id": "7c3cf3b8fc",
+              "question": "How to fix the error \"ModuleNotFoundError: No module named 'kafka.vendor.six.moves'?\"",
+              "sort_order": 28,
+              "content": "According to [GitHub](https://github.com/dpkp/kafka-python/):\n\n\"DUE TO ISSUES WITH RELEASES, IT IS SUGGESTED TO USE [GitHub](https://github.com/wbarnha/kafka-python-ng) FOR THE TIME BEING.\"\n\nUse the following command to install:\n\n```bash\npip install kafka-python-ng\n```",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-7/028_7c3cf3b8fc_how-to-fix-the-error-modulenotfounderror-no-module.md"
+            },
+            {
+              "id": "acd25600d1",
+              "question": "How to configure and run a Python script in Kestra Docker on Windows 11 without the 'Could not find or install 'Python 3.13' path' error?",
+              "sort_order": 18,
+              "content": "```yaml\ntype: io.kestra.plugin.scripts.python.Commands\ncommands:\n  - pip install requests kestra\n  - python your_script.py\nInputFiles:\n  your_script.py: |\n    # Python script content from before\n```\n\nTo use, replace `your_script.py` with your actual script filename and paste the Python code under `InputFiles`.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-2/018_acd25600d1_windows11-kestra-python-script.md"
+            },
+            {
+              "id": "0f2a26772e",
+              "question": "Python: Generators in Python",
+              "sort_order": 42,
+              "content": "A generator is a function in Python that returns an iterator using the `yield` keyword.\n\nA generator is a special type of iterable, similar to a list or a tuple, but with a crucial difference. Instead of creating and storing all the values in memory at once, a generator generates values on-the-fly as you iterate over it. This makes generators memory-efficient, particularly when dealing with large datasets.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-3/042_0f2a26772e_python-generators-in-python.md"
+            }
+          ],
+          "tool_call_id": "call_ahAyK5k5daqmj7P4K73ld7Ag",
+          "metadata": null,
+          "timestamp": "2026-03-26T06:03:35.269729+00:00",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-03-26T06:03:35.270236+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "f7ec0cc7-2ea1-41b0-9977-fb058b755309",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "content": "To install Kafka in Python, you can use the following steps based on the dependencies required for a Kafka producer:\n\n1. **Install `confluent-kafka`**:\n   - Using pip:\n     ```bash\n     pip install confluent-kafka\n     ```\n   - Using conda:\n     ```bash\n     conda install conda-forge::python-confluent-kafka\n     ```\n\n2. **Install `fastavro`** (if you're working with Avro data format):\n   ```bash\n   pip install fastavro\n   ```\n\nAdditionally, if you encounter any issues with the `kafka-python` package, you might want to uninstall it and install a specific version:\n\n1. Uninstall the current `kafka-python` package:\n   ```bash\n   pip uninstall kafka-python\n   ```\n\n2. Install a specific version:\n   ```bash\n   pip install kafka-python==1.4.6\n   ```\n\nIf you encounter compatibility issues with the `kafka-python` package, an alternative package you can try is `kafka-python-ng`:\n\n```bash\npip install kafka-python-ng\n```\n\nMake sure to check the documentation for any additional configuration or specific versions compatible with your environment.",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 1004,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 255,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T06:03:40.745009+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "stop",
+        "timestamp": "2026-03-26T06:03:36+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNY6aEoRbL8zFlgbtkysWPRsUNWAy",
+      "finish_reason": "stop",
+      "run_id": "f7ec0cc7-2ea1-41b0-9977-fb058b755309",
+      "metadata": null
+    }
+  ],
+  "source": "user"
+}

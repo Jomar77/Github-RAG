@@ -1,0 +1,167 @@
+{
+  "agent_name": "faq_agent_V2",
+  "system_prompt": "['\\nYou are a helpful assistant for a course.\\n\\nUse the search tool to find relevant information from the course materials before answering questions.\\n\\nIf you can find specific information through search, use it to provide accurate answers.\\n\\nAlways include references by citing the filename of the source material you used.  \\nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\\n\\nIf the search doesn\\'t return relevant results, let the user know and provide general guidance.\\n']",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "text_search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "Why can't I see generated documentation in the free version while running models?",
+          "timestamp": "2026-03-26T06:59:52.253079+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-03-26T06:59:52.253079+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "4bcdd508-568f-404a-9088-96a1a506d839",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "args": "{\"query\":\"generated documentation free version running models\"}",
+          "tool_call_id": "call_FAf0dbyqcxqOe5emTXcnNmry",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 223,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 19,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T06:59:53.870380+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "tool_calls",
+        "timestamp": "2026-03-26T06:59:52+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNYz2MkTe7vi4NLqeonkjxWNihC9g",
+      "finish_reason": "tool_call",
+      "run_id": "4bcdd508-568f-404a-9088-96a1a506d839",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "content": [
+            {
+              "id": "98b6a15ece",
+              "question": "Documentation or book sign not shown even after doing `dbt docs generate`.",
+              "sort_order": 1,
+              "content": "In the free version, it does not show the docs when models are run in the development environment. Create a production job and tick the 'generate docs' section. Execute it, and it will generate the documentation.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-6/001_98b6a15ece_documentation-or-book-sign-not-shown-even-after-do.md"
+            },
+            {
+              "id": "6022cc0440",
+              "question": "GCP FREE TRIAL ACCOUNT ERROR",
+              "sort_order": 17,
+              "content": "If you're encountering an error when trying to create a GCP free trial account, and it's not related to country restrictions, credit/debit card problems, or IP issues, it might be a random problem. Here\u2019s a workaround:\n\n- Ask friends in your country to try signing up for the free trial using their Gmail accounts and their debit/credit cards.\n- If one succeeds, you can temporarily use their Gmail to access the trial.\n\nThis method could help you bypass the issue!",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/017_6022cc0440_gcp-free-trial-account-error.md"
+            },
+            {
+              "id": "78fda262c6",
+              "question": "How does dbt handle dependencies between models?",
+              "sort_order": 79,
+              "content": "Dbt provides a mechanism called `ref` to manage dependencies between models. By referencing other models using the `ref` keyword in SQL, dbt automatically understands the dependencies and ensures the correct execution order.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/079_78fda262c6_how-does-dbt-handle-dependencies-between-models.md"
+            },
+            {
+              "id": "7cec1857a9",
+              "images": [
+                {
+                  "description": "image #1",
+                  "id": "image_1",
+                  "path": "images/data-engineering-zoomcamp/image_789bb06f.png"
+                }
+              ],
+              "question": "DBT: DBT allows only 1 project in free developer version.",
+              "sort_order": 87,
+              "content": "Yes, DBT allows only 1 project under one account. But you can create multiple accounts as shown below:\n\n<{IMAGE:image_1}>",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/087_7cec1857a9_dbt-dbt-allows-only-1-project-in-free-developer-ve.md"
+            },
+            {
+              "id": "e596dc3cbe",
+              "question": "DBT: When executing dbt run after installing dbt-utils latest version i.e., 1.0.0 warning has generated",
+              "sort_order": 20,
+              "content": "**Error**: `dbt_utils.surrogate_key` has been replaced by `dbt_utils.generate_surrogate_key`\n\n**Fix**:\n\n- Replace `dbt_utils.surrogate_key` with `dbt_utils.generate_surrogate_key` in `stg_green_tripdata.sql`.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/020_e596dc3cbe_dbt-when-executing-dbt-run-after-installing-dbt-ut.md"
+            }
+          ],
+          "tool_call_id": "call_FAf0dbyqcxqOe5emTXcnNmry",
+          "metadata": null,
+          "timestamp": "2026-03-26T06:59:53.875241+00:00",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-03-26T06:59:53.875241+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "4bcdd508-568f-404a-9088-96a1a506d839",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "content": "In the free version of the platform, you will not see the generated documentation when models are run in the development environment. To generate the documentation, you need to create a production job and ensure that the 'generate docs' section is checked. After executing that job, the documentation will be generated.\n\nFor more details, you can refer to the source: [Documentation not shown even after generating](https://github.com/DataTalksClub/faq/blob/main/faq-main/_questions/data-engineering-zoomcamp/module-6/001_98b6a15ece_documentation-or-book-sign-not-shown-even-after-do.md).",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 925,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 127,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T06:59:58.244323+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "stop",
+        "timestamp": "2026-03-26T06:59:55+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNYz5jXAiCmiX1hnk9Bs2z5lYUCGl",
+      "finish_reason": "stop",
+      "run_id": "4bcdd508-568f-404a-9088-96a1a506d839",
+      "metadata": null
+    }
+  ],
+  "source": "ai-generated"
+}

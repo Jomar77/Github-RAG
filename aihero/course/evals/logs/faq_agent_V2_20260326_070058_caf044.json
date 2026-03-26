@@ -1,0 +1,167 @@
+{
+  "agent_name": "faq_agent_V2",
+  "system_prompt": "['\\nYou are a helpful assistant for a course.\\n\\nUse the search tool to find relevant information from the course materials before answering questions.\\n\\nIf you can find specific information through search, use it to provide accurate answers.\\n\\nAlways include references by citing the filename of the source material you used.  \\nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\\n\\nIf the search doesn\\'t return relevant results, let the user know and provide general guidance.\\n']",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "text_search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "What should I check if my SSH connection to my VM keeps timing out?",
+          "timestamp": "2026-03-26T07:00:43.535152+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-03-26T07:00:43.535152+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "643776d0-9184-47ab-8554-fc2f3df1c278",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "args": "{\"query\":\"SSH connection timing out VM\"}",
+          "tool_call_id": "call_NSxwsgDT4ndITeQPoJHqL05b",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 224,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 18,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:00:44.537319+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "tool_calls",
+        "timestamp": "2026-03-26T07:00:44+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNYzs19qr6MIRzRhPdxa65pdBg6VP",
+      "finish_reason": "tool_call",
+      "run_id": "643776d0-9184-47ab-8554-fc2f3df1c278",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "content": [
+            {
+              "id": "a63d2734b2",
+              "question": "GCP VM: VM connection request timeout",
+              "sort_order": 110,
+              "content": "**Question:** I connected to my VM perfectly fine last week (SSH) but when I tried again this week, the connection request keeps timing out.\n\n**Answer:**\n\n1. **Start Your VM:** Make sure the VM is running in your GCP console.\n\n2. **Update External IP:**\n   \n   - Copy its External IP once the VM is running.\n   - Update your SSH configuration file with this IP.\n\n3. **Edit SSH Config:**\n   \n   ```bash\n   cd ~/.ssh\n   code config\n   ```\n   \n   This command opens the config file in VSCode for editing.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/110_a63d2734b2_gcp-vm-vm-connection-request-timeout.md"
+            },
+            {
+              "id": "51bc7e280d",
+              "question": "GCP VM - mkdir: cannot create directory \u2018.ssh\u2019: Permission denied",
+              "sort_order": 108,
+              "content": "If you encounter an error while trying to create a directory:\n\n```bash\nUser1@DESKTOP-PD6UM8A MINGW64 /\n\n$ mkdir .ssh\n\nmkdir: cannot create directory \u2018.ssh\u2019: Permission denied\n```\n\nThis error occurs because you are attempting to create the directory in the root folder (`/`).\n\nTo resolve this, create the directory in your home directory instead. Use the following steps:\n\n1. Navigate to your home directory using:\n   \n   ```bash\n   cd ~\n   ```\n\n2. Create the `.ssh` directory:\n   \n   ```bash\n   mkdir .ssh\n   ```\n\nFor further guidance, watch [this video](https://www.youtube.com/watch?v=ae-CV2KfoN0&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb).",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/108_51bc7e280d_gcp-vm-mkdir-cannot-create-directory-ssh-permissio.md"
+            },
+            {
+              "id": "7889d2bad5",
+              "images": [
+                {
+                  "description": "image #1",
+                  "id": "image_1",
+                  "path": "images/data-engineering-zoomcamp/image_0f494026.png"
+                }
+              ],
+              "question": "SSH error in VS Code - \u201cCould not establish connection to \"de-zoomcamp\": Permission denied (publickey).\u201d",
+              "sort_order": 1,
+              "content": "If you are using Windows, try the following steps to resolve the error:\n\n1. Copy the `.ssh` folder from the Linux file path to Windows.\n2. In the `config` file, use:\n   \n   ```\n   IdentityFile C:\\Users\\<username>\\.ssh\\gcp\n   ```\n   \n   Instead of:\n   \n   ```\n   IdentityFile ~/.ssh/gcp\n   ```\n\n3. Ensure the private key file located at `C:\\Users\\<username>\\.ssh\\gcp` has an extra line at the end:\n\n   <{IMAGE:image_1}>",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-2/001_7889d2bad5_ssh-error-in-vs-code-could-not-establish-connectio.md"
+            },
+            {
+              "id": "10407876a1",
+              "question": "SSH Error: ssh: Could not resolve hostname linux: Name or service not known",
+              "sort_order": 130,
+              "content": "To resolve this, ensure that your config file is in `C/User/Username/.ssh/config`.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-1/130_10407876a1_ssh-error-ssh-could-not-resolve-hostname-linux-nam.md"
+            },
+            {
+              "id": "00e8093b90",
+              "question": "Running out of storage when using kestra with postgres on GCP VM",
+              "sort_order": 7,
+              "content": "Running out of storage while trying to backfill. I realized my GCP VM only has 30GB of storage and I was using it up quickly. Here are a couple of suggestions for managing storage:\n\n- **Clean up your GCP VM drive:** Use the command below to identify what is taking up the most space:\n\n  ```bash\n  sudo du -sh *\n  ```\n\n  - **(~1GB)** For me, the Anaconda installer was consuming a lot of space. If you no longer need it, you can delete it:\n  \n    ```bash\n    rm -rf <anacondainstaller_fpath>\n    ```\n\n  - **(~3GB)** Anaconda itself takes up a lot of space. You can\u2019t delete it entirely if you need Python, but you can clean it up significantly:\n    \n    ```bash\n    conda clean --all -y\n    ```\n\n- **Clean up your Kestra files:** Use a purge flow. You can find a generic example here:\n  \n  [https://kestra.io/docs/administrator-guide/purge](https://kestra.io/docs/administrator-guide/purge)\n  \n  I wanted to perform the cleanup immediately, rather than waiting until the end of the month, so I adjusted the `endDate` to `\"{{ now() }}\"` and removed the trigger block. You can also choose whether to remove FAILED state executions.\n\n- **Clean up your PostgreSQL database:** You can manually delete tables in pgAdmin, or set up a workflow in Kestra for it. I found it easy to do manually.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-2/007_00e8093b90_running-out-of-storage-when-using-kestra-with-post.md"
+            }
+          ],
+          "tool_call_id": "call_NSxwsgDT4ndITeQPoJHqL05b",
+          "metadata": null,
+          "timestamp": "2026-03-26T07:00:44.541180+00:00",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-03-26T07:00:44.542197+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "643776d0-9184-47ab-8554-fc2f3df1c278",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "content": "If your SSH connection to your VM keeps timing out, there are several things you should check:\n\n1. **Ensure Your VM is Running**: Make sure that your VM is active in your cloud provider's console (e.g., GCP). If it's stopped, you'll need to start it again.\n\n2. **Update External IP**: If your VM's external IP has changed, you will need to update your SSH configuration file with the new IP address. \n\n3. **Check SSH Configuration**: Make sure your SSH configuration file (`~/.ssh/config`) is correctly set up with the appropriate hostname and IP address.\n\n4. **Firewall Rules**: Verify that your firewall settings allow SSH connections (typically on port 22). You may need to add a specific rule to allow incoming connections from your IP address.\n\n5. **Network Availability**: Ensure that your local network is functioning properly. Sometimes, local router settings or firewall configurations can prevent an SSH connection.\n\nHere\u2019s a quick command to access and edit your SSH config file for checking:\n\n```bash\ncd ~/.ssh\ncode config\n```\n\nAlways ensure that the correct external IP address is being used when attempting to connect to the VM, as changes may happen periodically.\n\nFor a detailed example relating to GCP VMs, you can refer to the source material [here](https://github.com/DataTalksClub/faq/blob/main/faq-main/_questions/data-engineering-zoomcamp/module-1/110_a63d2734b2_gcp-vm-vm-connection-request-timeout.md).",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 1518,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 317,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:00:58.096336+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "stop",
+        "timestamp": "2026-03-26T07:00:45+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNYztmCfjDV18bHa4iXHSBLCVprZq",
+      "finish_reason": "stop",
+      "run_id": "643776d0-9184-47ab-8554-fc2f3df1c278",
+      "metadata": null
+    }
+  ],
+  "source": "ai-generated"
+}

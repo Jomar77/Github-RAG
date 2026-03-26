@@ -1,0 +1,167 @@
+{
+  "agent_name": "faq_agent_V2",
+  "system_prompt": "['\\nYou are a helpful assistant for a course.\\n\\nUse the search tool to find relevant information from the course materials before answering questions.\\n\\nIf you can find specific information through search, use it to provide accurate answers.\\n\\nAlways include references by citing the filename of the source material you used.  \\nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\\n\\nIf the search doesn\\'t return relevant results, let the user know and provide general guidance.\\n']",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "text_search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "How do I set up the `profiles.yml` file for dbt-core on a Windows machine?",
+          "timestamp": "2026-03-26T07:24:48.310470+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "timestamp": "2026-03-26T07:24:48.310470+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "ddd687f9-8c32-4abb-b84c-a7e419be12c6",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "args": "{\"query\":\"profiles.yml dbt-core Windows setup\"}",
+          "tool_call_id": "call_q2kmwhTC1O8uJ4COqACGaCkE",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 229,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 20,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:24:49.085336+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "tool_calls",
+        "timestamp": "2026-03-26T07:24:48+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNZNAEp4HeT6tvWFByr1biy1aKPAL",
+      "finish_reason": "tool_call",
+      "run_id": "ddd687f9-8c32-4abb-b84c-a7e419be12c6",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "text_search",
+          "content": [
+            {
+              "id": "49e1ec9d84",
+              "question": "dbt: Where should we create `profiles.yml`?",
+              "sort_order": 83,
+              "content": "For local environments using dbt-core, the profile configuration is valid for all projects. Note: dbt Cloud doesn\u2019t require it.\n\nThe `~/.dbt/profiles.yml` file should be located in your user's home directory. On Windows, this would typically be:\n\n```\nC:\\Users\\<YourUsername>\\.dbt\\profiles.yml\n```\n\nReplace `<YourUsername>` with your actual Windows username. This file is used by dbt to store connection profiles for different projects.\n\nHere's how you can create the `profiles.yml` file in the appropriate directory:\n\n1. Open File Explorer and navigate to `C:\\Users\\<YourUsername>\\`.\n2. Create a new folder named `.dbt` if it doesn't already exist.\n3. Inside the `.dbt` folder, create a new file named `profiles.yml`.\n\nUsage example can be found [here](https://gist.github.com/pizofreude/ff4d0601f1eb353683d8af8f4b5aac27?permalink_comment_id=5457712#gistcomment-5457712).",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/083_49e1ec9d84_dbt-where-should-we-create-profilesyml.md"
+            },
+            {
+              "id": "df38a5d809",
+              "question": "How to use dbt-core with Athena?",
+              "sort_order": 18,
+              "content": "If you don\u2019t have access to dbt Cloud, which is natively supported by AWS, you can use the community-built [dbt-Athena Adapter](https://dbt-athena.github.io/) for dbt-Core. Here are some references:\n\n- [AWS Blog](https://aws.amazon.com/blogs/big-data/from-data-lakes-to-insights-dbt-adapter-for-amazon-athena-now-supported-in-dbt-cloud/)\n- [YouTube Tutorial](https://youtu.be/JEizJAaaBkg?si=niTYdWoeiyC_w3h7)\n- [dbt Guides: Athena](https://docs.getdbt.com/guides/athena?step=1)\n- [dbt Athena Setup Documentation](https://docs.getdbt.com/docs/core/connect-data-platform/athena-setup)\n\n### Key Features:\n\n- Enables dbt to work with AWS Athena using dbt Core\n- Allows data transformation using `CREATE TABLE AS` or `CREATE VIEW` SQL queries\n\n### Not Yet Supported Features:\n\n- Python models\n- Persisting documentation for views\n\nThis adapter can be a valuable resource for those who need to work with Athena using dbt Core.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/project/018_df38a5d809_how-to-use-dbt-core-with-athena.md"
+            },
+            {
+              "id": "23687d0f93",
+              "images": [
+                {
+                  "description": "image #1",
+                  "id": "image_1",
+                  "path": "images/data-engineering-zoomcamp/image_48537290.png"
+                }
+              ],
+              "question": "DBT: The database is correct but I get Error with Incorrect Schema in Models",
+              "sort_order": 86,
+              "content": "What to do if your dbt model fails with an error similar to:\n\n```\nDBT-CORE\n```\n\nCheck **profiles.yml**:\n\n- Ensure your `profiles.yml` file is correctly configured with the correct schema and database under your target. This file is typically located in `~/.dbt/`.\n\nExample configuration:\n\n**DBT-CLOUD-IDE**\n\nCheck Credentials in dbt Cloud UI:\n\n- Navigate to the Credentials section in the dbt Cloud project settings.\n- Ensure the correct database and schema are set (e.g., \u2018my_dataset\u2019).\n\n<{IMAGE:image_1}>\n\nVerify Environment Settings:\n\n- Double-check that you are working in the correct environment (dev, prod, etc.), as dbt Cloud allows different settings for different environments.\n\n**No Need for profiles.yml**:\n\n- In dbt Cloud, you don\u2019t need to configure `profiles.yml` manually. All connection settings are handled via the UI.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/086_23687d0f93_dbt-the-database-is-correct-but-i-get-error-with-i.md"
+            },
+            {
+              "id": "a8e992c143",
+              "question": "dbt: Are there UI options for dbt Core like dbt Cloud?",
+              "sort_order": 84,
+              "content": "While dbt Core does not have an official UI like dbt Cloud, there are several tools available that provide UI functionality:\n\n- **Altimate's VS Code Extension**: \n  - Use the [VS Code dbt Power User extension](https://github.com/AltimateAI/vscode-dbt-power-user).\n  - Sign up for the community plan for free usage at [Altimate](https://app.myaltimate.com/register) and add the API into your VS Code extension.\n\n- **VSCode Snippets for dbt and Jinja**: \n  - Access the snippets package for SQL, YAML, and Markdown [here](https://github.com/bastienboutonnet/vscode-dbt).\n\n- **Monitoring with Elementary**:\n  - Monitor dbt projects using [Elementary](https://github.com/elementary-data/elementary).\n  - Learn more about its setup and features in this [Medium article](https://medium.com/@srinivas.dataengineer/supercharge-your-dbt-monitoring-with-elementary-data-0fac140a6f60).",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/084_a8e992c143_dbt-are-there-ui-options-for-dbt-core-like-dbt-clo.md"
+            },
+            {
+              "id": "f5c9c1b46d",
+              "question": "Power user for dbt vscode extension keeps asking to install dbt core even though dbt is installed in a virtual environment",
+              "sort_order": 88,
+              "content": "## Problem\nPower user for the dbt VS Code extension keeps prompting to install dbt core even though dbt is already installed in your virtual environment.\n\n## Steps to resolve\n- Activate your virtual environment:\n\n```\n# Unix/macOS\nsource <path-to-venv>/bin/activate\n\n# Windows\n<path-to-venv>\\Scripts\\activate\n```\n\n- In your dbt project folder (the one containing `dbt_project.yml`), run:\n\n```\ndbt debug\n```\n\n- Copy the Python interpreter path shown by `dbt debug` (the path to the Python executable inside your virtual environment).\n\n- Configure VS Code to use that interpreter:\n\n```\nCtrl/Cmd+Shift+P  ->  Python: Select Interpreter  ->  Enter interpreter path\n```\n\n- Paste the copied path and press Enter. Then check the bottom-left corner of VS Code to confirm that dbt core shows with a checkmark, indicating it is using the selected interpreter.\n\nIf the prompt persists, ensure there are no conflicting Python environments and consider restarting VS Code.",
+              "filename": "faq-main/_questions/data-engineering-zoomcamp/module-4/088_f5c9c1b46d_dbt-vscode-extension-dbt-core-venv.md"
+            }
+          ],
+          "tool_call_id": "call_q2kmwhTC1O8uJ4COqACGaCkE",
+          "metadata": null,
+          "timestamp": "2026-03-26T07:24:49.091873+00:00",
+          "outcome": "success",
+          "part_kind": "tool-return"
+        }
+      ],
+      "timestamp": "2026-03-26T07:24:49.091873+00:00",
+      "instructions": "You are a helpful assistant for a course.\n\nUse the search tool to find relevant information from the course materials before answering questions.\n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.  \nWhen citing the reference, replace \"faq-main\" by the full path to the GitHub repository: \"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request",
+      "run_id": "ddd687f9-8c32-4abb-b84c-a7e419be12c6",
+      "metadata": null
+    },
+    {
+      "parts": [
+        {
+          "content": "To set up the `profiles.yml` file for `dbt-core` on a Windows machine, follow these steps:\n\n1. **Locate/Create the Directory**:\n   - The `profiles.yml` file should be located in your user's home directory.\n   - On a Windows machine, it should be at:\n     ```\n     C:\\Users\\<YourUsername>\\.dbt\\profiles.yml\n     ```\n   - Replace `<YourUsername>` with your actual Windows username.\n\n2. **Create the `.dbt` Folder**:\n   - Open File Explorer and navigate to `C:\\Users\\<YourUsername>\\`.\n   - Create a new folder named `.dbt` if it doesn't already exist.\n\n3. **Create the `profiles.yml` File**:\n   - Inside the `.dbt` folder, create a new file named `profiles.yml`.\n\n4. **Edit the `profiles.yml` File**:\n   - You can open the `profiles.yml` file with a text editor and add your dbt configuration. Make sure to specify the necessary connection profiles.\n\nHere\u2019s a simple example of what your `profiles.yml` might look like:\n```yaml\nmy_profile:\n  target: dev\n  outputs:\n    dev:\n      type: bigquery\n      project: my_project\n      dataset: my_dataset\n      threads: 1\n      keyfile: path/to/keyfile.json\n```\n\nFor more detailed examples or specific configurations, you can refer to the [dbt Documentation](https://docs.getdbt.com/docs/getting-started/setting-up-dbts-environment).\n\nThis information is based on the following source: [dbt: Where should we create `profiles.yml`](https://github.com/DataTalksClub/faq/blob/main/faq-main/_questions/data-engineering-zoomcamp/module-4/083_49e1ec9d84_dbt-where-should-we-create-profilesyml.md).",
+          "id": null,
+          "provider_name": null,
+          "provider_details": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 1859,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 393,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2026-03-26T07:24:56.025040+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_url": "https://api.openai.com/v1/",
+      "provider_details": {
+        "finish_reason": "stop",
+        "timestamp": "2026-03-26T07:24:49+00:00"
+      },
+      "provider_response_id": "chatcmpl-DNZNBFwK5PG7YgwixO48RxTE9Y7Zw",
+      "finish_reason": "stop",
+      "run_id": "ddd687f9-8c32-4abb-b84c-a7e419be12c6",
+      "metadata": null
+    }
+  ],
+  "source": "ai-generated"
+}

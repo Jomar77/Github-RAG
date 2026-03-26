@@ -6,7 +6,9 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "openai>=1.68.0",
+    "pandas>=2.2.0",
     "pydantic-ai>=0.0.15",
+    "python-dotenv>=1.0.1",
     "python-frontmatter>=1.1.0",
     "requests>=2.32.5",
     "tqdm>=4.67.0",
