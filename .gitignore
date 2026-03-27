@@ -9,3 +9,6 @@ pip-wheel-metadata/
 dist/
 build/
 *.egg-info/
+.vscode/settings.json
+settings.json
+.claude/settings.json
