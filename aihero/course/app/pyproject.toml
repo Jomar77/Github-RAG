@@ -1,5 +1,5 @@
 [project]
-name = "course"
+name = "app"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -14,10 +14,10 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "jupyter>=1.1.1",
+    "pytest>=8.3.5",
 ]
 
-[tool.uv.workspace]
-members = [
-    "app",
-]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
