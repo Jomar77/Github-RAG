@@ -16,6 +16,7 @@ This app builds a lightweight retrieval-augmented assistant over a GitHub reposi
 - `search_tools.py`: Exposes index search as an agent tool.
 - `search_agent.py`: Configures the agent system prompt and tool wiring.
 - `logs.py`: Serializes and writes interaction logs.
+- `streamlit_app.py`: Streamlit web chat entrypoint.
 - `main.py`: CLI entrypoint and orchestration loop.
 
 ## Prerequisites
@@ -39,11 +40,19 @@ uv sync --group dev
 
 ## Run the App
 
+CLI:
+
 ```bash
 uv run python main.py
 ```
 
 Then ask questions in the prompt. Type `stop` to exit.
+
+Streamlit web app:
+
+```bash
+uv run streamlit run streamlit_app.py
+```
 
 ## Logs
 

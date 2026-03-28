@@ -26,7 +26,11 @@ We will use uv as the package manager. If you don't have uv, let's install it:
 Shell
 Shell
 Shell
-pip install uv
+Windows (PowerShell):
+irm https://astral.sh/uv/install.ps1 | iex
+
+macOS/Linux:
+curl -LsSf https://astral.sh/uv/install.sh | sh
 Next, create a folder aihero with two subfolders:
 - course - here you will reproduce all the examples from this email course
 - project - here you will create your own project
